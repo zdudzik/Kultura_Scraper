@@ -4,11 +4,10 @@
 require 'nokogiri'
 require 'open-uri'
 require_relative 'publication'
+require_relative 'contribution'
 
 # Class to scrape Kultura publication page
 class Scraper
-
-	$publication_hash = {}
 
 	# Created 04/06/2020
 	# ------------------------------------
@@ -22,9 +21,13 @@ class Scraper
 	# ------------------------------------
 	# Processes each edition of kultura from
 	# current year/page.
-	def parse_publication_list
-        @doc.css('div.spis-tresci').each do |link|
-            parse_publication_data link
+	def parse_years_publications year_publications
+		@doc.css('div.spis-tresci').each do |link|
+			publication_contributions = []
+			edition_name = parse_publication_data link, publication_contributions
+			
+			edition = Publication.new(edition_name, publication_contributions)
+			year_publications.push(edition)
 		end
 	end
 
@@ -33,11 +36,12 @@ class Scraper
 	# Created 04/06/2020
 	# ------------------------------------
 	# Parses a single publication and adds it to
-	# the publication hash.
+	# the contribution list.
 	#   (link) publication_link
-	def parse_publication_data publication_link
-		authors = []
-		articles = []
+	#	(list) contributions
+	def parse_publication_data publication_link, contributions
+		author_names = []
+		article_names = []
 		edition_name = ""
 
 		publication_link.css('h4.pub-title').each do |publication_data|
@@ -45,20 +49,30 @@ class Scraper
 		end
 
 		publication_link.css('span.nazwisko').each do |data_link|
-            authors.push data_link.content.strip.tr(':','').to_s
+            author_names.push data_link.content.strip.tr(':','').to_s
 		end
 		
 		publication_link.css('span.tytul').each do |data_link|
-            articles.push data_link.content.strip.tr('\\','').to_s
+            article_names.push data_link.content.strip.tr('\\','').to_s
 		end
 
-		contents = authors.zip(articles).to_h
-		articles.length.times do |i|
-			
+
+		author_names.length.times do |i|
+			article = Contribution.new(author_names[i], article_names[i])
+			contributions.push(article)
 		end
-		$publication_hash.store(edition_name,contents)
+
+		return edition_name
 	end
 end
 
-scraper = Scraper.new 'http://kulturaparyska.com/en/historia/publikacje/1951'
-scraper.parse_publication_list
+puts "Please provide the year you would like: "
+year = gets.chomp
+
+year_publications = []
+scraper = Scraper.new 'http://kulturaparyska.com/en/historia/publikacje/' + year
+scraper.parse_years_publications year_publications
+
+year_publications.length.times do |i|
+	print year_publications[i].to_s
+end
