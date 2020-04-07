@@ -44,14 +44,17 @@ class Scraper
 		article_names = []
 		edition_name = ""
 
+		#scrape title
 		publication_link.css('h4.pub-title').each do |publication_data|
 			edition_name = publication_data.content.strip.to_s
 		end
 
+		#scrape author name
 		publication_link.css('span.nazwisko').each do |data_link|
             author_names.push data_link.content.strip.tr(':','').to_s
 		end
 		
+		#scrape article title
 		publication_link.css('span.tytul').each do |data_link|
             article_names.push data_link.content.strip.tr('\\','').to_s
 		end
@@ -64,15 +67,4 @@ class Scraper
 
 		return edition_name
 	end
-end
-
-puts "Please provide the year you would like: "
-year = gets.chomp
-
-year_publications = []
-scraper = Scraper.new 'http://kulturaparyska.com/en/historia/publikacje/' + year
-scraper.parse_years_publications year_publications
-
-year_publications.length.times do |i|
-	print year_publications[i].to_s
 end
