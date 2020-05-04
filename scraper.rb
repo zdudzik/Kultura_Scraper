@@ -6,7 +6,7 @@ require 'open-uri'
 require_relative 'publication'
 require_relative 'contribution'
 
-# Class to scrape Kultura publication page
+# Class to scrape Kultura publication page for periodicals
 class Scraper
 
 	# Created 04/06/2020

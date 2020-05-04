@@ -48,6 +48,9 @@ if selection == '1'
     end
 else
     scraper = BookScraper.new 'http://kulturaparyska.com/en/historia/publikacje/' + year
-    scraper.parse_years_publications publications
-end
+    scraper.parse_years_books publications
 
+    publications.length.times do |i|
+        print publications[i].to_s
+    end
+end
