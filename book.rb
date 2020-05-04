@@ -19,5 +19,8 @@ class Book
 
 	def to_s
 		print "-" + @author + ", " + @title + "\n" + @description + "\n\n"
+    end
+    def to_csv
+		return @author + "," + @title + "," + @description + "\n"
 	end
 end 

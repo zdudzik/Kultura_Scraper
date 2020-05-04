@@ -14,8 +14,13 @@ puts "Please provide the year you would like or \"a\" for all: "
 year = gets.chomp
 puts "Please select:\n\t[1] Scrape Periodicals\n\t[2] Scrape Book Publications"
 selection = gets.chomp
+puts "Generate csv? [y/n]"
+gen_csv = gets.chomp
+#puts "Please provide a file name (do not incude file extension): "
+#filename = gets.chomp
 
 if selection == '1'
+    #if all, scrape all years (processor intensive), otherwise just scrape specified year
     unless year == 'a'
         scraper = Scraper.new 'http://kulturaparyska.com/en/historia/publikacje/' + year
         scraper.parse_years_publications publications
@@ -29,28 +34,39 @@ if selection == '1'
         publications.flatten!
     end
     
+    #print scraped results
     publications.length.times do |i|
         print publications[i].to_s
     end
     
-    print "search for author: "
-    search = gets.chomp
-    puts "\n\n------------------------------------\n"
     
-    publications.length.times do |i|
-        edition = publications[i]
-        edition_articles = edition.contents
-        edition_articles.length.times do |j|
-            if (edition_articles[j].author == search)
-                puts edition_articles[j].to_s
-            end
-        end
-    end
 else
-    scraper = BookScraper.new 'http://kulturaparyska.com/en/historia/publikacje/' + year
-    scraper.parse_years_books publications
+    #if all, scrape all years (processor intensive), otherwise just scrape specified year
+    unless year == 'a'
+        scraper = BookScraper.new 'http://kulturaparyska.com/en/historia/publikacje/' + year
+        scraper.parse_years_books publications
+    else 
+        $sites.length.times do |i|
+            year_publications = []
+            scraper = BookScraper.new $sites[i]
+            scraper.parse_years_books year_publications
+            publications.push(year_publications)
+        end
+        publications.flatten!
+    end
 
+    #print scraped results
     publications.length.times do |i|
-        print publications[i].to_s
+        #print publications[i].to_s
+    end
+
+    if gen_csv == 'y'
+        data_file = File.open("output.csv","w")
+        publications.length.times do |i|
+            line = publications[i].to_csv
+            #print line
+            data_file.write(line)
+        end
+        data_file.close
     end
 end
