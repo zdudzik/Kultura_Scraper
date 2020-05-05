@@ -20,7 +20,11 @@ class Book
 	def to_s
 		print "-" + @author + ", " + @title + "\n" + @description + "\n\n"
     end
-    def to_csv
-		return @author + "," + @title + "," + @description + "\n"
+	def to_csv
+		a = @author.delete "\n\t"
+		t = @title.delete "\n\t"
+		d = @description.delete "\n\t"
+		csv_string = "\"" + a +"\",\"" + t+ "\",\"" + d + "\"\n"
+		return csv_string
 	end
 end 

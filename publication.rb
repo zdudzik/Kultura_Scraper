@@ -24,4 +24,8 @@ class Publication
 		end
 		print "\n\n"
 	end
+
+	def entry_to_csv index
+		csv_string = "\"" + @edition + "\"," + contents[index].to_csv
+	end
 end 

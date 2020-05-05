@@ -14,13 +14,9 @@ puts "Please provide the year you would like or \"a\" for all: "
 year = gets.chomp
 puts "Please select:\n\t[1] Scrape Periodicals\n\t[2] Scrape Book Publications"
 selection = gets.chomp
-puts "Generate csv? [y/n]"
-gen_csv = gets.chomp
-#puts "Please provide a file name (do not incude file extension): "
-#filename = gets.chomp
 
 if selection == '1'
-    #if all, scrape all years (processor intensive), otherwise just scrape specified year
+    #if all, scrape all years (time intensive), otherwise just scrape specified year
     unless year == 'a'
         scraper = Scraper.new 'http://kulturaparyska.com/en/historia/publikacje/' + year
         scraper.parse_years_publications publications
@@ -33,15 +29,19 @@ if selection == '1'
         end
         publications.flatten!
     end
-    
-    #print scraped results
+
+    data_file = File.open("periodicals_output.csv","w")
     publications.length.times do |i|
-        print publications[i].to_s
+        publications[i].contents.length.times do |j|
+            line = publications[i].entry_to_csv(j)
+            data_file.write(line)
+        end
     end
+    data_file.close
     
     
 else
-    #if all, scrape all years (processor intensive), otherwise just scrape specified year
+    #if all, scrape all years (time intensive), otherwise just scrape specified year
     unless year == 'a'
         scraper = BookScraper.new 'http://kulturaparyska.com/en/historia/publikacje/' + year
         scraper.parse_years_books publications
@@ -55,18 +55,11 @@ else
         publications.flatten!
     end
 
-    #print scraped results
+    data_file = File.open("books_output.csv","w")
     publications.length.times do |i|
-        #print publications[i].to_s
+        line = publications[i].to_csv
+        data_file.write(line)
     end
+    data_file.close
 
-    if gen_csv == 'y'
-        data_file = File.open("output.csv","w")
-        publications.length.times do |i|
-            line = publications[i].to_csv
-            #print line
-            data_file.write(line)
-        end
-        data_file.close
-    end
 end

@@ -16,4 +16,9 @@ class Contribution
     def to_s
         print @author + ": " + @article
     end
+
+    def to_csv
+        csv_string = "\"" + @author + "\",\"" + @article + "\"\n"
+        return csv_string
+    end
 end 
