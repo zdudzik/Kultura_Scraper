@@ -5,16 +5,17 @@ require_relative 'contribution'
 # Class to describe a course including number,
 # name, syllabus, and credits.
 class Book
-	attr_accessor :author, :title, :description
+	attr_accessor :author, :title, :description, :year
 
 	# Initializes single Book
 	#   (string) author
     #	(string) title
     #   (string) description
-	def initialize author, title, description
+	def initialize author, title, description, year
         @author = author
         @title = title
-        @description = description
+		@description = description
+		@year = year
 	end
 
 	def to_s
@@ -24,7 +25,7 @@ class Book
 		a = @author.delete "\n\t"
 		t = @title.delete "\n\t"
 		d = @description.delete "\n\t"
-		csv_string = "\"" + a +"\",\"" + t+ "\",\"" + d + "\"\n"
+		csv_string = "\"" + @year + "\",\"" + a +"\",\"" + t + "\",\"" + d + "\"\n"
 		return csv_string
 	end
 end 

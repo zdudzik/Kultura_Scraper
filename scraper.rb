@@ -21,12 +21,12 @@ class Scraper
 	# ------------------------------------
 	# Processes each edition of kultura from
 	# current year/page.
-	def parse_years_publications year_publications
+	def parse_years_publications year_publications, year
 		@doc.css('div.spis-tresci').each do |link|
 			publication_contributions = []
 			edition_name = parse_publication_data link, publication_contributions
 			
-			edition = Publication.new(edition_name, publication_contributions)
+			edition = Publication.new(edition_name, publication_contributions, year)
 			year_publications.push(edition)
 		end
 	end

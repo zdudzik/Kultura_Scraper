@@ -7,7 +7,7 @@ require_relative 'publication'
 require_relative 'contribution'
 require_relative 'scraper'
 require_relative 'book_scraper'
-require_relative 'sites'
+require_relative 'years'
 
 publications = []
 puts "Please provide the year you would like or \"a\" for all: "
@@ -19,12 +19,13 @@ if selection == '1'
     #if all, scrape all years (time intensive), otherwise just scrape specified year
     unless year == 'a'
         scraper = Scraper.new 'http://kulturaparyska.com/en/historia/publikacje/' + year
-        scraper.parse_years_publications publications
+        scraper.parse_years_publications(publications,year)
     else 
-        $sites.length.times do |i|
+        $years.length.times do |i|
             year_publications = []
-            scraper = Scraper.new $sites[i]
-            scraper.parse_years_publications year_publications
+            url = 'http://kulturaparyska.com/en/historia/publikacje/' + $years[i]
+            scraper = Scraper.new url
+            scraper.parse_years_publications(year_publications,year)
             publications.push(year_publications)
         end
         publications.flatten!
@@ -44,12 +45,13 @@ else
     #if all, scrape all years (time intensive), otherwise just scrape specified year
     unless year == 'a'
         scraper = BookScraper.new 'http://kulturaparyska.com/en/historia/publikacje/' + year
-        scraper.parse_years_books publications
+        scraper.parse_years_books(publications,year)
     else 
-        $sites.length.times do |i|
+        $years.length.times do |i|
             year_publications = []
-            scraper = BookScraper.new $sites[i]
-            scraper.parse_years_books year_publications
+            url = 'http://kulturaparyska.com/en/historia/publikacje/' + $years[i]
+            scraper = BookScraper.new url
+            scraper.parse_years_books(year_publications,year)
             publications.push(year_publications)
         end
         publications.flatten!

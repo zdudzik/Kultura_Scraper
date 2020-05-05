@@ -5,14 +5,15 @@ require_relative 'contribution'
 # Class to describe a course including number,
 # name, syllabus, and credits.
 class Publication
-	attr_accessor :edition, :contents
+	attr_accessor :edition, :contents, :year
 
 	# Initializes single Publication
 	#   (string) edition
 	#	(list) contents
-	def initialize edition, contents
+	def initialize edition, contents, year
 		@edition = edition
 		@contents = contents
+		@year = year
 	end
 
 	def to_s
@@ -26,6 +27,7 @@ class Publication
 	end
 
 	def entry_to_csv index
-		csv_string = "\"" + @edition + "\"," + contents[index].to_csv
+		csv_string = "\"" + @year + "\",\"" + @edition + "\"," + contents[index].to_csv
+		return csv_string
 	end
 end 

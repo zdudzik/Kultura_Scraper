@@ -22,13 +22,13 @@ class BookScraper
 	# ------------------------------------
 	# Processes each edition of kultura from
 	# current year/page.
-	def parse_years_books year_books
+	def parse_years_books year_books, year
 		@doc.css('div.short-opis').each do |link|
 			author = link.css('strong')[0].text.strip
 			title = link.css('strong')[1].text.strip
 			description = link.css('p').text.strip
 			
-			book = Book.new(author, title, description)
+			book = Book.new(author, title, description, year)
 			year_books.push(book)
 		end
 	end
