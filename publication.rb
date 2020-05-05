@@ -1,9 +1,8 @@
 require_relative 'contribution'
 
-# File created 04/06/2020
 # ------------------------------------
-# Class to describe a course including number,
-# name, syllabus, and credits.
+# Class to describe an individual publication of Kultura by
+# edition number, articles contained (as contributions), and publication year 
 class Publication
 	attr_accessor :edition, :contents, :year
 
@@ -16,6 +15,7 @@ class Publication
 		@year = year
 	end
 
+	#method to display as a string to the console
 	def to_s
 		print @edition + ":"
 		contents.length.times do |i|
@@ -26,6 +26,7 @@ class Publication
 		print "\n\n"
 	end
 
+	#method to convert a contribution from the publication to a full csv formatted line
 	def entry_to_csv index
 		csv_string = "\"" + @year + "\",\"" + @edition + "\"," + contents[index].to_csv
 		return csv_string

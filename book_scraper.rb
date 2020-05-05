@@ -1,5 +1,3 @@
-# File created 04/08/2020
-
 # Imports
 require 'nokogiri'
 require 'open-uri'
@@ -10,7 +8,6 @@ require_relative 'book'
 # Class to scrape Kultura publication page for book publications
 class BookScraper
 
-	# Created 04/08/2020
 	# ------------------------------------
 	# Creates a new document object.
 	#   (string) url, valid URL
@@ -18,7 +15,6 @@ class BookScraper
 		@doc = Nokogiri::HTML(open(url))
 	end
 
-	# Created 04/08/2020
 	# ------------------------------------
 	# Processes each edition of kultura from
 	# current year/page.

@@ -1,9 +1,8 @@
 require_relative 'contribution'
 
-# File created 05/04/2020
 # ------------------------------------
-# Class to describe a course including number,
-# name, syllabus, and credits.
+# Class to describe a book by
+# author, title, book description, and publication year
 class Book
 	attr_accessor :author, :title, :description, :year
 
@@ -18,9 +17,12 @@ class Book
 		@year = year
 	end
 
+	#method to display as a string to the console
 	def to_s
 		print "-" + @author + ", " + @title + "\n" + @description + "\n\n"
-    end
+	end
+	
+	#method to convert book to a csv formatted line
 	def to_csv
 		a = @author.delete "\n\t"
 		t = @title.delete "\n\t"

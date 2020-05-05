@@ -1,5 +1,3 @@
-# File created 04/06/2020
-
 # Imports
 require 'nokogiri'
 require 'open-uri'
@@ -9,7 +7,6 @@ require_relative 'contribution'
 # Class to scrape Kultura publication page for periodicals
 class Scraper
 
-	# Created 04/06/2020
 	# ------------------------------------
 	# Creates a new document object.
 	#   (string) url, valid URL
@@ -17,7 +14,6 @@ class Scraper
 		@doc = Nokogiri::HTML(open(url))
 	end
 
-	# Created 04/06/2020
 	# ------------------------------------
 	# Processes each edition of kultura from
 	# current year/page.
@@ -33,7 +29,6 @@ class Scraper
 
 	private
 
-	# Created 04/06/2020
 	# ------------------------------------
 	# Parses a single publication and adds it to
 	# the contribution list.
@@ -59,7 +54,7 @@ class Scraper
             article_names.push data_link.content.strip.tr('\\','').to_s
 		end
 
-
+		#zip the lists together into individual entries, and add to contributions list
 		author_names.length.times do |i|
 			article = Contribution.new(author_names[i], article_names[i])
 			contributions.push(article)
