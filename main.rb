@@ -27,9 +27,9 @@ if selection == '1'
     else 
         $years.length.times do |i|
             year_publications = []
-            url = 'http://kulturaparyska.com/en/historia/publikacje/' + $years[i]
+            url = 'http://kulturaparyska.com/en/historia/publikacje/' + $years[i].to_s
             scraper = Scraper.new url
-            scraper.parse_years_publications(year_publications,year)
+            scraper.parse_years_publications(year_publications,$years[i].to_s)
             publications.push(year_publications)
         end
         publications.flatten!
@@ -56,9 +56,9 @@ else
     else 
         $years.length.times do |i|
             year_publications = []
-            url = 'http://kulturaparyska.com/en/historia/publikacje/' + $years[i]
+            url = 'http://kulturaparyska.com/en/historia/publikacje/' + $years[i].to_s
             scraper = BookScraper.new url
-            scraper.parse_years_books(year_publications,year)
+            scraper.parse_years_books(year_publications,$years[i].to_s)
             publications.push(year_publications)
         end
         publications.flatten!
