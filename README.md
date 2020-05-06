@@ -23,4 +23,4 @@ Data will be saved in the main directory as csv files, which can be opened and v
 * change `File Origin` from **1252: Western European (Windows)** to **65001: Unicode (UTF-8)**
 
 ### Provided Data
-In the `Sample_Data` you can see two csv files which contain data from all years, as well as two excel spreadsheets with cleaned data.
+In the `Sample_Data` you can see two csv files which contain data from all years, as well as two excel spreadsheets with cleaned data and pivot graphs with examples of some basic analysis.
