@@ -1,5 +1,5 @@
 # Kultura_Scraper
-Web Scraper for Instytut Literacki book publications and Kultura periodical.
+Web Scraper for Instytut Literacki book publications and periodicals.
 
 ### Setup Instructions
 All you need installed to run the scraper is Ruby. To check if you already have Ruby installed
