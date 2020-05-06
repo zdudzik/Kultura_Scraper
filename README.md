@@ -1,5 +1,5 @@
 # Kultura_Scraper
-Web Scraper for Instytut Literacki
+Web Scraper for Instytut Literacki book publications and Kultura periodical.
 
 ### Setup Instructions
 All you need installed to run the scraper is Ruby. To check if you already have Ruby installed
@@ -22,5 +22,5 @@ Data will be saved in the main directory as csv files, which can be opened and v
 * in the data tab, click add source from text/csv, and select file
 * change `File Origin` from **1252: Western European (Windows)** to **65001: Unicode (UTF-8)**
 
-##Provided Data
+### Provided Data
 In the `Sample_Data` you can see two csv files which contain data from all years, as well as two excel spreadsheets with cleaned data.
