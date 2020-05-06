@@ -1,14 +1,14 @@
 # Kultura_Scraper
 Web Scraper for Instytut Literacki
 
-###Setup Instructions
+##Setup Instructions
 All you need installed to run the scraper is Ruby. To check if you already have Ruby installed
 open your terminal and run: `ruby -v`
 
 If ruby is not installed installation insructions can be found here:
 https://www.ruby-lang.org/en/documentation/installation/
 
-###Running the Scraper
+##Running the Scraper
 * Clone or Download the repository to an accessable location on your computer. 
 * In your terminal navigate to the Kultura_Scraper directory and run: `ruby main.rb`
 * Provide either a specific year to scrape, or `a` to scrape through all years
