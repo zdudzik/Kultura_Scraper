@@ -1,8 +1,8 @@
 # Imports
 require 'nokogiri'
 require 'open-uri'
-require_relative 'publication'
-require_relative 'contribution'
+require_relative '../Models/publication'
+require_relative '../Models/contribution'
 
 # Class to scrape Kultura publication page for periodicals
 class Scraper

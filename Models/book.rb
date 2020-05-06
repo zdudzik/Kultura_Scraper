@@ -1,5 +1,3 @@
-require_relative 'contribution'
-
 # ------------------------------------
 # Class to describe a book by
 # author, title, book description, and publication year

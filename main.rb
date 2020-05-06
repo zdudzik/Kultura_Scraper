@@ -1,11 +1,11 @@
 # Imports
 require 'nokogiri'
 require 'open-uri'
-require_relative 'publication'
-require_relative 'contribution'
-require_relative 'scraper'
-require_relative 'book_scraper'
-require_relative 'years'
+require_relative 'Models/publication'
+require_relative 'Models/contribution'
+require_relative 'Controllers/scraper'
+require_relative 'Controllers/book_scraper'
+require_relative 'Models/years'
 
 #initalize array for data storage
 publications = []
